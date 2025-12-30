@@ -7,13 +7,13 @@ from .views import (
 )
 
 urlpatterns = [
-    # Expenses CRUD (user-scoped)
+    # Expenses CRUD
     path("", ExpenseListCreateView.as_view(), name="expense-list-create"),
     path("<int:pk>/", ExpenseDetailView.as_view(), name="expense-detail"),
 
     # Analytics
     path("summary/", ExpenseSummaryView.as_view(), name="expense-summary"),
 
-    # Authentication
+    # Auth
     path("register/", RegisterView.as_view(), name="register"),
 ]
