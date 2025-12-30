@@ -1,1 +1,2 @@
-web: gunicorn expapi.wsgi
+gunicorn expapi.wsgi
+

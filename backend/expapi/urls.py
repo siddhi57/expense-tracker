@@ -12,6 +12,6 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # Expense APIs
-    path('api/expenses/', include('expenses.urls')),
+    # your app urls
+    path('api/', include('expenses.urls')),  # if you have this
 ]
