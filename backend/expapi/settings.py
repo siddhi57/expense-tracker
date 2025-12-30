@@ -37,9 +37,9 @@ INSTALLED_APPS = [
 # Middleware
 # --------------------------------------------------
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',   # MUST be first
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,3 +132,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+CSRF_TRUSTED_ORIGINS = [
+    "https://leafy-cendol-718398.netlify.app",
+    "https://*.netlify.app",
+]
