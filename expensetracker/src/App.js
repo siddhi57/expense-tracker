@@ -7,14 +7,13 @@ import api from "./api";
 import "./App.css";
 import jsPDF from "jspdf";
 
+
 function App() {
   const [expenses, setExpenses] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authPage, setAuthPage] = useState("login");
   const [selectedMonth, setSelectedMonth] = useState("");
-  
-
 
   // ---------------- AUTH CHECK ----------------
   useEffect(() => {
@@ -28,10 +27,20 @@ function App() {
   // ---------------- FETCH EXPENSES ----------------
   const fetchExpenses = async () => {
     try {
-      const res = await api.get("expenses/");
+      const res = await api.get("/");
       setExpenses(res.data);
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  // ---------------- DELETE EXPENSE (ADDED) ----------------
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`${id}/`);
+      fetchExpenses();
+    } catch (err) {
+      console.error("Delete failed", err);
     }
   };
 
@@ -54,12 +63,11 @@ function App() {
       return <Register onBackToLogin={() => setAuthPage("login")} />;
     }
     return (
-    <Login
-      onLogin={handleLoginSuccess}
-      onShowRegister={() => setAuthPage("register")}
-    />
-  );
-    
+      <Login
+        onLogin={handleLoginSuccess}
+        onShowRegister={() => setAuthPage("register")}
+      />
+    );
   }
 
   // ---------------- MONTH FILTER ----------------
@@ -169,7 +177,10 @@ function App() {
       </div>
 
       <div className="card">
-        <div className="history-header" onClick={() => setShowHistory(!showHistory)}>
+        <div
+          className="history-header"
+          onClick={() => setShowHistory(!showHistory)}
+        >
           <h2>Expense History</h2>
           <span>{showHistory ? "▲" : "▼"}</span>
         </div>
@@ -185,7 +196,23 @@ function App() {
                 </div>
               </div>
 
-              <div className="expense-amount">Rs. {e.amount}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div className="expense-amount">Rs. {e.amount}</div>
+
+                <button
+                  onClick={() => handleDelete(e.id)}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    color: "red",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                  title="Delete expense"
+                >
+                  ❌
+                </button>
+              </div>
             </div>
           ))}
       </div>

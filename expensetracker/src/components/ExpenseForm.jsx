@@ -26,12 +26,11 @@ function ExpenseForm({ onExpenseAdded, expense }) {
       category,
       date,
     };
-
     if (expense) {
-      await api.put(`expenses/${expense.id}/`, payload);
-    } else {
-      await api.post("expenses/", payload);
-    }
+  await api.put(`${expense.id}/`, payload);
+} else {
+  await api.post("/", payload);
+}
 
     onExpenseAdded();
 

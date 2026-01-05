@@ -132,7 +132,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
-CSRF_TRUSTED_ORIGINS = [
-    "https://leafy-cendol-718398.netlify.app",
-    "https://*.netlify.app",
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://*.netlify.app",
+# ]

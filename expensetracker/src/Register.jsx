@@ -14,7 +14,7 @@ function Register({ onBackToLogin }) {
     setSuccess("");
 
     try {
-      await api.post("expenses/register/", {
+      await api.post("/register/", {
         username,
         password,
       });

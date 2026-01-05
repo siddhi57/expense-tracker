@@ -1,6 +1,8 @@
 import { useState } from "react";
-import axios from 'axios';
+// import axios from 'axios';
 import "./App.css";
+import api from "./api";
+
 
 function Login({ onLogin, onShowRegister }) {
   const [username, setUsername] = useState("");
@@ -12,13 +14,10 @@ function Login({ onLogin, onShowRegister }) {
     setError("");
 
     try {
-      const res = await axios.post(
-  "http://127.0.0.1:8000/api/token/",
-  {
-    username,
-    password,
-  }
-);
+      const res = await api.post("token/", {
+  username,
+  password,
+});
 
 
       localStorage.setItem("access_token", res.data.access);
